@@ -2,7 +2,8 @@
 Object-Oriented Programming
 
 This repository contains my solutions and implementations for the projects related to the C++ Modules at 42 School.
-
+<br>
+<br>
 ## Module 05: Repetition and Exceptions
 
 The module focuses on concepts related to repetition (loops) and exception handling in C++.
@@ -22,6 +23,8 @@ Module 08 focuses on templated containers, iterators, and algorithms in CPP. I l
 ## Module 09: Containers
 
 Module 09 is designed to help us understand the containers in CPP. Containers are fundamental in C++, providing different data structures like vectors, lists, maps, and more. Understanding these containers is crucial for effective C++ programming.
+
+<br>
 
 Feel free to explore the projects in each module's directory for detailed implementations and solutions.
 
