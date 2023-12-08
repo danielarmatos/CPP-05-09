@@ -20,21 +20,10 @@ int	main(int argc, char **argv)
 		std::cout << "Usage: " << argv[0] << " <name> <grade>" << std::endl;
 		return (1);
 	}
-	try
-	{
-		Bureaucrat b(argv[1], atoi(argv[2]));
-		std::cout << b;
-		b.decrementGrade();
-		b.incrementGrade();
-		b.decrementGrade();
-		b.decrementGrade();
-		std::cout << b;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e) {
-		std::cerr << "Exception 01: " << e.what() << std::endl;
-	} catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cerr << "Exception 02: " << e.what() << std::endl;
-	} catch (const std::exception& e) {
-		std::cerr << "Unknown exception: " << e.what() << std::endl;
-	}
+	Bureaucrat b(argv[1], atoi(argv[2]));
+	std::cout << b;
+	b.decrementGrade();
+	b.incrementGrade();
+	b.decrementGrade();
+	b.decrementGrade();
 }

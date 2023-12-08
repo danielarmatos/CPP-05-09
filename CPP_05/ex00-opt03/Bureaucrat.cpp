@@ -64,25 +64,46 @@ int Bureaucrat::getGrade() const {
 	return (this->grade);
 }
 
+/* Using exceptions for normal control flow (such as incrementing or
+ * decrementing a grade) can be considered an anti-pattern in C++.
+ * Exceptions are typically reserved for exceptional conditions, errors,
+ * or situations where normal control flow cannot proceed. In this case,
+ * it might be more appropriate to use conditional checks instead of
+ * relying on exceptions for control flow. */
+
 void Bureaucrat::incrementGrade() {
-	if (this->grade > 1) {
-		this->grade -= 1;
-		std::cout	<< this->name << " had the grade increased: " << this->grade
-					<< std::endl;
+	try
+	{
+		if (this->grade > 1) {
+			this->grade -= 1;
+			std::cout	<< this->name << " had the grade increased: " << this->grade
+						 << std::endl;
+		}
+		else
+			throw GradeTooHighException();
 	}
-	else
-		throw Bureaucrat::GradeTooHighException();
+	catch (GradeTooHighException &e)
+	{
+		std::cout << RED << "Exception caught: " << e.what() << RESET << std::endl;
+	}
 }
 
 void Bureaucrat::decrementGrade() {
-	if (this->grade < 150)
+	try
 	{
-		this->grade += 1;
-		std::cout	<< this->name << " had the grade decreased: " << this->grade
-					<< std::endl;
+		if (this->grade < 150)
+		{
+			this->grade += 1;
+			std::cout	<< this->name << " had the grade decreased: " << this->grade
+						 << std::endl;
+		}
+		else
+			throw GradeTooLowException();
 	}
-	else
-		throw Bureaucrat::GradeTooLowException();
+	catch (GradeTooLowException &e)
+	{
+		std::cout << RED << "Exception caught: " << e.what() << RESET << std::endl;
+	}
 }
 
 std::ostream& operator<<(std::ostream& out, Bureaucrat const& bureaucrat) {

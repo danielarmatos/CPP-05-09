@@ -17,22 +17,27 @@ Bureaucrat::Bureaucrat() : name("Default"), grade(1) {
 }
 
 Bureaucrat::Bureaucrat(const std::string name, int grade)
-	: name(name)
+		: name(name), grade(grade)
 {
-	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	else if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
-	else
+	try
 	{
-		this->grade = grade;
-		std::cout	<< "Bureaucrat " << name << " with grade " << grade
-					 << " created " << std::endl;
+		if (grade < 1)
+			throw GradeTooHighException();
+		else if (grade > 150)
+			throw GradeTooLowException();
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+		std::cout << "Exception caught: " << e.what();
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+		std::cout << "Exception caught: " << e.what();
 	}
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
-	: name(other.name), grade(other.grade)
+		: name(other.name), grade(other.grade)
 {
 	std::cout << "Bureaucrat created (Copy constructor)" << std::endl;
 }
@@ -65,24 +70,38 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-	if (this->grade > 1) {
-		this->grade -= 1;
-		std::cout	<< this->name << " had the grade increased: " << this->grade
-					<< std::endl;
+	try
+	{
+		if (this->grade > 1) {
+			this->grade -= 1;
+			std::cout	<< this->name << " had the grade increased: " << this->grade
+						 << std::endl;
+		}
+		else
+			throw GradeTooHighException();
 	}
-	else
-		throw Bureaucrat::GradeTooHighException();
+	catch (GradeTooHighException &e)
+	{
+		std::cout << "Exception caught: " << e.what();
+	}
 }
 
 void Bureaucrat::decrementGrade() {
-	if (this->grade < 150)
+	try
 	{
-		this->grade += 1;
-		std::cout	<< this->name << " had the grade decreased: " << this->grade
-					<< std::endl;
+		if (this->grade < 150)
+		{
+			this->grade += 1;
+			std::cout	<< this->name << " had the grade decreased: " << this->grade
+						 << std::endl;
+		}
+		else
+			throw GradeTooLowException();
 	}
-	else
-		throw Bureaucrat::GradeTooLowException();
+	catch (GradeTooLowException &e)
+	{
+		std::cout << "Exception caught: " << e.what();
+	}
 }
 
 std::ostream& operator<<(std::ostream& out, Bureaucrat const& bureaucrat) {
@@ -92,9 +111,9 @@ std::ostream& operator<<(std::ostream& out, Bureaucrat const& bureaucrat) {
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	return ("Grade too high!");
+	return ("Grade too high!\n");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	return ("Grade too low!");
+	return ("Grade too low!\n");
 }
