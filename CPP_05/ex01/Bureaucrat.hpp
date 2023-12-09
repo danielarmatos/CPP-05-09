@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <exception>
+#include "Form.hpp"
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -22,6 +23,8 @@
 #define YELLOW  "\033[33m"
 #define CYAN     "\033[36m"
 #define MAGENTA  "\033[35m"
+
+class Form;
 
 class Bureaucrat {
 private:
@@ -51,7 +54,7 @@ public:
 		virtual const char* what() const throw();
 	};
 
-	void signForm();
+	void signForm(Form& form);
 };
 
 std::ostream& operator<<(std::ostream& out, Bureaucrat const& bureaucrat);

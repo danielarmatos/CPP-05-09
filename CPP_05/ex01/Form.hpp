@@ -13,12 +13,16 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 
+#include <iostream>
+#include <exception>
 #include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form {
 private:
 	const std::string name;
-	bool signed;
+	bool isSigned;
 	const int gradeToSign;
 	const int gradeToExecute;
 
@@ -45,7 +49,7 @@ public:
 	public:
 		virtual const char* what() const throw();
 	};
-}
+};
 
 std::ostream& operator<<(std::ostream& out, Form const& form);
 

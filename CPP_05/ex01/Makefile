@@ -6,13 +6,13 @@
 #    By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/03 15:53:54 by dreis-ma          #+#    #+#              #
-#    Updated: 2023/12/08 20:09:34 by dreis-ma         ###   ########.fr        #
+#    Updated: 2023/12/09 14:29:46 by dreis-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Bureaucrat.cpp
+SRC = main.cpp Bureaucrat.cpp Form.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
