@@ -67,7 +67,7 @@ int	AForm::getGradeToExecute() const {
 }
 
 std::ostream& operator<<(std::ostream& out, AForm const& form) {
-	out << "AForm name: " << form.getName() << "; Grade to Sign: " << form.getGradeToSign()
+	out << "Form name: " << form.getName() << "; Grade to Sign: " << form.getGradeToSign()
 		<< "; Grade to Execute: " << form.getGradeToExecute();
 	if (form.getSignedValue() == true)
 		std::cout << "; Is signed" << std::endl;
