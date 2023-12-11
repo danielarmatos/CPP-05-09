@@ -21,14 +21,16 @@ ScalarConverter::~ScalarConverter() {
 
 // -------------------------- //
 
+
 void ScalarConverter::convert(const std::string& input)
 {
     // Convert to char
+    // If float 42.0f has to print '*'
     if (input == "nan")
         std::cout << "char: impossible" << std::endl;
     else if (input.length() == 1 && std::isprint(input[0]) && isalpha(input[0])) {
         char charValue = input[0];
-        std::cout << "char: " << charValue << std::endl;
+        std::cout << "char: '" << charValue << "'" << std::endl;
     } else {
         std::cout << "char: Non displayable" << std::endl;
     }
@@ -42,18 +44,38 @@ void ScalarConverter::convert(const std::string& input)
     } catch (const std::out_of_range& e) {
         std::cout << "int: impossible" << std::endl;
     }*/
-
-    try {
-        size_t pos;
-        int intValue = std::stoi(input, &pos);
-        if (pos == input.length()) {
-            std::cout << "int: " << intValue << std::endl;
-        } else {
-            throw std::invalid_argument("int: impossible");
-        }
-    } catch (const std::invalid_argument& e) {
+    if (input == "nan")
         std::cout << "int: impossible" << std::endl;
+    else
+    {
+        std::stringstream ss(input);
+        int intValue;
+        if (!(ss >> intValue))
+        {
+            if (ss.str().length() == 1)
+            {
+                intValue = static_cast<int>(ss.str()[0]);
+                std::cout << "int: " << intValue << std::endl;
+            }
+
+            else
+                std::cout << "int: impossible" << std::endl;
+        }
+        else
+            std::cout << "int: " << intValue << std::endl;
+       /* try {
+            size_t pos;
+            int intValue = std::stoi(input, &pos);
+            if (pos == input.length()) {
+                std::cout << "int: " << intValue << std::endl;
+            } else {
+                throw std::invalid_argument("int: impossible");
+            }
+        } catch (const std::invalid_argument& e) {
+            std::cout << "int: impossible" << std::endl;
+        }*/
     }
+
 
     // Convert to float
     try {
