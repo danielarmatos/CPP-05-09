@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Span.hpp"
+
 int main()
 {
+    // Test from the subject
     Span sp = Span(5);
 
     sp.addNumber(6);
@@ -22,6 +25,56 @@ int main()
 
     std::cout << sp.shortestSpan() << std::endl;
     std::cout << sp.longestSpan() << std::endl;
+    std::cout << std::endl;
 
-    return 0
+    // Test with Maximum number of elements
+    try
+    {
+        Span sp = Span(2);
+
+        sp.addNumber(6);
+        sp.addNumber(3);
+        sp.addNumber(17);
+    }
+    catch (std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Test with not enough elements
+    try
+    {
+        Span sp = Span(1);
+
+        sp.addNumber(6);
+        std::cout << sp.shortestSpan() << std::endl;
+        std::cout << sp.longestSpan() << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Test with more than 10 000 elements
+    try
+    {
+        Span sp = Span(11000);
+
+        std::vector<int> v(11000);
+
+        std::srand(std::time(0));
+        std::generate(v.begin(), v.end(), std::rand);
+        sp.addNumbers(v.begin(), v.end());
+
+        std::cout << sp.shortestSpan() << std::endl;
+        std::cout << sp.longestSpan() << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    return (0);
 }
