@@ -12,7 +12,7 @@
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Array.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
