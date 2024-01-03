@@ -16,7 +16,7 @@ SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = ex02
+NAME = PmergeMe
 
 all: $(NAME)
 

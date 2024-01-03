@@ -12,5 +12,9 @@
 
 int main()
 {
-
+    if (argc != 2)
+    {
+        std::cout << "Usage: " << argv[0] << " <inverted Polish mathematical expression>" << std::endl;
+        return (1);
+    }
 }

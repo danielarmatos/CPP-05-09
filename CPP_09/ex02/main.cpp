@@ -12,5 +12,9 @@
 
 int main()
 {
-
+    if (argc != 2)
+    {
+        std::cout << "Usage: " << argv[0] << " <positive integer sequence>" << std::endl;
+        return (1);
+    }
 }

@@ -16,7 +16,7 @@ SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = ex01
+NAME = RPN
 
 all: $(NAME)
 
