@@ -64,8 +64,8 @@ int main()
 
         std::vector<int> v(11000);
 
-        std::srand(std::time(0));
-        std::generate(v.begin(), v.end(), std::rand);
+        std::srand(std::time(0)); // Initializes the random number generator with the current time
+        std::generate(v.begin(), v.end(), std::rand); // Fills the vector with random integers
         sp.addNumbers(v.begin(), v.end());
 
         std::cout << sp.shortestSpan() << std::endl;
