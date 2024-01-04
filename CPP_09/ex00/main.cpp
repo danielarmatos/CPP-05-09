@@ -10,11 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "BitcoinExchange.hpp"
+#include <filesystem>
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cout << "Usage: " << argv[0] << " <file>" << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         return (1);
+    }
+    //std::ofstream file;
+    //file.open(argv[1]);
+
+    if (std::filesystem::exists(argv[1])) {
+        std::cout << "File exists!" << std::endl;
+    } else {
+        std::cout << "File does not exist." << std::endl;
     }
 }
