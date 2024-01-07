@@ -10,11 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int main()
+#include "PmergeMe.hpp"
+
+int main(int argc, char **argv)
 {
-    if (argc != 2)
+    if (argc < 2)
     {
         std::cout << "Usage: " << argv[0] << " <positive integer sequence>" << std::endl;
         return (1);
     }
+    std::cout << "Before " << std::endl;
 }
