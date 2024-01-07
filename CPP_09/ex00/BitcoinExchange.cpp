@@ -3,13 +3,14 @@
 BitcoinExchange::BitcoinExchange() {
 }
 
-/*BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : database(other.database) {
 
 }
 
-BitcoinExchange::BitcoinExchange& operator=(const BitcoinExchange &other) {
-
-}*/
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &other) {
+    database = other.database;
+    return (*this);
+}
 
 BitcoinExchange::~BitcoinExchange() {
 
