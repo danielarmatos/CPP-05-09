@@ -12,6 +12,22 @@
 
 #include "PmergeMe.hpp"
 
+bool validateSequence(int argc, char **argv)
+{
+    for (int i = 1; i < argc; i++)
+    {
+        try {
+            int n = std::stoi(argv[i]);
+            if (n < 0)
+                throw std::exception();
+        } catch (const std::exception& e) {
+            std::cerr << "Error: please use a positive integer sequence as argument" << std::endl;
+            return false;
+        }
+    }
+    return true;
+}
+
 int main(int argc, char **argv)
 {
     if (argc < 2)
@@ -19,5 +35,28 @@ int main(int argc, char **argv)
         std::cout << "Usage: " << argv[0] << " <positive integer sequence>" << std::endl;
         return (1);
     }
-    std::cout << "Before " << std::endl;
+    if (!validateSequence(argc, argv))
+        return (1);
+
+    std::cout << "Before: ";
+    for (int i = 1; i < argc; i++)
+        std::cout << argv[i] << " ";
+    std::cout << std::endl;
+
+    PmergeMe merge;
+    merge.sortVector(argv + 1);
+    merge.sortDeque(argv + 1);
+
+
+
+
+
+/*
+    std::cout << "After: " << std::endl;
+    std::cout   << "Time to process a range of " << argc - 1
+                << " elements with std::vector : " << std::endl;
+
+    std::cout   << "Time to process a range of " << argc - 1
+                << " elements with std::deque : " << std::endl;
+*/
 }

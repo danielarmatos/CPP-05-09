@@ -1,13 +1,13 @@
 #pragma once
 
 #include <iostream>
-#include <set>
 #include <vector>
 #include <deque>
+#include <ctime>
+
 
 class PmergeMe {
 private:
-    std::set<int> set;
     std::vector<int> vector;
     std::deque<int> deque;
 
@@ -16,5 +16,11 @@ public:
     PmergeMe(const PmergeMe &);
     PmergeMe& operator=(const PmergeMe &);
     ~PmergeMe();
+
+    void sortVector(char **nbs);
+    void sortDeque(char **nbs);
+    template <typename Container> void mergeInsertSort(Container& sequence);
+    template <typename Container> void displaySequence(const Container& sequence);
+
 
 };
