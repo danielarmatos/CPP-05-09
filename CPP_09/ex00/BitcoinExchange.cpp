@@ -19,7 +19,7 @@ BitcoinExchange::~BitcoinExchange() {
 
 void BitcoinExchange::readDatabase(const std::string& filename)
 {
-    std::ifstream file(filename);
+    std::ifstream file(filename.c_str());
     if (!file.is_open())
     {
         std::cerr << "Error: could not open file " << filename << std::endl;
@@ -39,9 +39,10 @@ void BitcoinExchange::readDatabase(const std::string& filename)
         if (pos != std::string::npos) {
             std::string date = text.substr(0, pos);
             std::string value = text.substr(pos + 1);
-            float rate = std::stof(value);
+            //float rate = std::stof(value);
+			float rate = atof(value.c_str());
 
-            if (isValidDate(date) && rate >= 0)
+			if (isValidDate(date) && rate >= 0)
                 database[date] = rate;
         }
     }
@@ -69,7 +70,8 @@ void BitcoinExchange::bitcoinExchange(const std::string& str)
     if (pos != std::string::npos) {
         std::string date = str.substr(0, pos);
         std::string value = str.substr(pos + 3);
-        float rate = std::stof(value);
+       // float rate = std::stof(value);
+		float rate = atof(value.c_str());
         if (rate >= 0 && rate <= 1000)
         {
             if (isValidDate(date))
@@ -96,7 +98,7 @@ void BitcoinExchange::bitcoinExchange(const std::string& str)
 void BitcoinExchange::processInputFile(const std::string& filename)
 {
     bool databaseExists = false;
-    std::ifstream file(filename);
+    std::ifstream file(filename.c_str());
     if (!file.is_open())
     {
         std::cerr << "Error: could not open file " << filename << std::endl;
