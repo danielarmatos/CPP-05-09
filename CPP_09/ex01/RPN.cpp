@@ -17,13 +17,20 @@ RPN::~RPN() {
 
 // *** //
 
-bool RPN::isNumber(const std::string& str) {
+/*bool RPN::isNumber(const std::string& str) {
     try {
         std::stoi(str);
         return true;
     } catch (...) {
         return false;
     }
+}*/
+
+bool RPN::isNumber(const std::string& str) {
+	char* endPtr;
+	int result = std::strtol(str.c_str(), &endPtr, 10);
+
+	return *endPtr == '\0' && result != 0;
 }
 
 int RPN::performOperation(int operand1, int operand2, char op) {
@@ -51,7 +58,8 @@ int RPN::processRPN(std::string expression)
     {
         if (isNumber(token))
         {
-            int n = std::stoi(token);
+           // int n = std::stoi(token);
+			int n = atoi(token.c_str());
             if (n > 9)
                 throw ErrorException();
             stack.push(n);
