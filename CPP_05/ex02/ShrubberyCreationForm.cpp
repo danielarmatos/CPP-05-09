@@ -32,7 +32,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
         throw AForm::GradeTooLowException();
     else if (this->getSignedValue())
     {
-        std::ofstream sFile(target + "_shrubbery");
+		std::ofstream sFile((this->target + "_shrubbery").c_str());
         sFile << "              * *    \n"
                  "           *    *  *\n"
                  "      *  *    *     *  *\n"

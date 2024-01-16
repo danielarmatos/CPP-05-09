@@ -15,6 +15,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
