@@ -4,7 +4,7 @@
 #include <vector>
 #include <deque>
 #include <ctime>
-
+#include <algorithm>
 
 class PmergeMe {
 private:

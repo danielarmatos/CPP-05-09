@@ -11,8 +11,26 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <sstream>
 
-bool validateSequence(int argc, char **argv)
+bool stringToInt(const std::string& str, int& result) {
+	std::istringstream iss(str);
+	return (iss >> result) && (iss.eof());
+}
+
+bool validateSequence(int argc, char** argv)
+{
+	for (int i = 1; i < argc; i++) {
+		int n;
+		if (!stringToInt(argv[i], n) || n < 0) {
+			std::cerr << "Error: please use a positive integer sequence as argument" << std::endl;
+			return false;
+		}
+	}
+	return true;
+}
+
+/*bool validateSequence(int argc, char **argv)
 {
     for (int i = 1; i < argc; i++)
     {
@@ -26,7 +44,7 @@ bool validateSequence(int argc, char **argv)
         }
     }
     return true;
-}
+}*/
 
 int main(int argc, char **argv)
 {

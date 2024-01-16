@@ -52,7 +52,7 @@ void PmergeMe::sortVector(char **nbs)
 
     for (int i = 0; nbs[i]; i++)
     {
-        vector.push_back(std::stoi(nbs[i]));
+		vector.push_back(atoi(nbs[i]));
         size++;
     }
 
@@ -79,7 +79,7 @@ void PmergeMe::sortDeque(char **nbs)
 
     for (int i = 0; nbs[i]; i++)
     {
-        deque.push_back(std::stoi(nbs[i]));
+        deque.push_back(atoi(nbs[i]));
         size++;
     }
 
