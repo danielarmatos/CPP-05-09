@@ -9,7 +9,7 @@ Base::~Base() {
 
 Base * Base::generate(void)
 {
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
+    std::srand(static_cast<unsigned>(std::time(0)));
     int randomIndex = std::rand() % 3;
 
     if (randomIndex == 0)
