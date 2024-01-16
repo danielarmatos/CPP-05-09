@@ -91,7 +91,7 @@ static void convertFromFloat(const float input)
     char *pC = NULL;
     int *pI = NULL;
 
-    if (!(input > INT_MAX || input < INT_MIN || std::isnan(input)))
+    if (!(input > 2147483647.0f || input < -2147483648.0f || std::isnan(input)))
     {
         c = static_cast<char>(input);
         i = static_cast<int>(input);
@@ -145,7 +145,8 @@ static void convertToActualType(const std::string& input)
     if (isValidString(input, "0123456789+-"))
     {
         try {
-            convertFromInt(std::stoi(input));
+            //convertFromInt(std::stoi(input));
+			convertFromInt(atoi(input.c_str()));
             return ;
         }
         catch (const std::out_of_range& e) {
@@ -155,7 +156,7 @@ static void convertToActualType(const std::string& input)
     if (input == "-inff" || input == "+inff" || input == "nanf" || (isValidString(input, "0123456789.f+-") && (input.find('f') == input.size() - 1)))
     {
         try {
-            convertFromFloat(std::stof(input));
+            convertFromFloat(atof(input.c_str()));
             return ;
         }
         catch (const std::out_of_range& e) {
@@ -165,7 +166,7 @@ static void convertToActualType(const std::string& input)
     if (input == "-inf" || input == "+inf" || input == "nan" || isValidString(input, "0123456789.+-"))
     {
         try {
-            convertFromDouble(std::stod(input));
+            convertFromDouble(atof(input.c_str()));
             return ;
         }
         catch (const std::out_of_range& e) {
