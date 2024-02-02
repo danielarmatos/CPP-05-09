@@ -18,4 +18,7 @@ public:
 
     AForm* makeForm(const std::string& name, const std::string& target);
     typedef AForm* (*FormFunction)(const std::string&);
+
+    /* This creates a type alias named FormFunction. It represents a pointer to a function that takes a
+     * const std::string& parameter and returns a pointer to an object of type AForm.*/
 };

@@ -13,7 +13,7 @@
 #include "Form.hpp"
 
 Form::Form()
-	: name("Default"), isSigned(false), gradeToSign(0), gradeToExecute(0)
+	: name("Default"), isSigned(false), gradeToSign(1), gradeToExecute(1)
 {
 	std::cout << "Form created" << std::endl;
 }

@@ -53,5 +53,3 @@ public:
 std::ostream& operator<<(std::ostream& out, Bureaucrat const& bureaucrat);
 
 #endif
-
-
