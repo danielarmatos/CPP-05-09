@@ -29,3 +29,8 @@ template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::end() {
     return this->c.end();
 }
+
+/* Container c
+	the underlying container
+	(protected member object)
+ */
