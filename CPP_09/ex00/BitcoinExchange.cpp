@@ -39,7 +39,6 @@ void BitcoinExchange::readDatabase(const std::string& filename)
         if (pos != std::string::npos) {
             std::string date = text.substr(0, pos);
             std::string value = text.substr(pos + 1);
-            //float rate = std::stof(value);
 			float rate = atof(value.c_str());
 
 			if (isValidDate(date) && rate >= 0)
@@ -70,7 +69,7 @@ void BitcoinExchange::bitcoinExchange(const std::string& str)
     if (pos != std::string::npos) {
         std::string date = str.substr(0, pos);
         std::string value = str.substr(pos + 3);
-       // float rate = std::stof(value);
+
 		float rate = atof(value.c_str());
         if (rate >= 0 && rate <= 1000)
         {
