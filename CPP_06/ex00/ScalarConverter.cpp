@@ -70,10 +70,13 @@ static void convertFromDouble(const double input)
 
     if (!(input > INT_MAX || input < INT_MIN || std::isnan(input)))
     {
-        c = static_cast<char>(input);
-        i = static_cast<int>(input);
+		if (input < 256 && input >= 0)
+		{
+			c = static_cast<char>(input);
+			pC = &c;
+		}
 
-        pC = &c;
+        i = static_cast<int>(input);
         pI = &i;
     }
 
@@ -93,10 +96,12 @@ static void convertFromFloat(const float input)
 
     if (!(input > 2147483647.0f || input < -2147483648.0f || std::isnan(input)))
     {
-        c = static_cast<char>(input);
+		if (input < 256 && input >= 0)
+		{
+			c = static_cast<char>(input);
+			pC = &c;
+		}
         i = static_cast<int>(input);
-
-        pC = &c;
         pI = &i;
     }
 
@@ -106,13 +111,29 @@ static void convertFromFloat(const float input)
     printOutput(pC, pI, &f, &d);
 }
 
-static void convertFromInt(const int input)
+static void convertFromInt(std::string inputStr)
 {
-    char c = static_cast<char>(input);
+	char *pC = NULL;
+	char* endptr;
+	long longValue = strtol(inputStr.c_str(), &endptr, 10);
+
+	if (*endptr != '\0' || longValue > INT_MAX || longValue < INT_MIN)
+	{
+		printOutput(NULL, NULL, NULL, NULL);
+		return ;
+	}
+	int input = static_cast<int>(longValue);
+	if (input < 256 && input >= 0)
+	{
+		char c = static_cast<char>(input);
+		pC = &c;
+	}
+	else
+		pC = NULL;
     int i = input;
     float f = static_cast<float>(input);
     double d = static_cast<double>(input);
-    printOutput(&c, &i, &f, &d);
+    printOutput(pC, &i, &f, &d);
 }
 
 static void convertFromChar(const char input)
@@ -137,43 +158,19 @@ static bool isValidString(const std::string& input, const std::string &allowedCh
 static void convertToActualType(const std::string& input)
 {
     if (input.size() == 1 && !isdigit(input[0]))
-    {
         convertFromChar(input[0]);
-        return ;
-    }
 
-    if (isValidString(input, "0123456789+-"))
-    {
-        try {
-            //convertFromInt(std::stoi(input));
-			convertFromInt(atoi(input.c_str()));
-            return ;
-        }
-        catch (const std::out_of_range& e) {
-        }
-    }
+    else if (isValidString(input, "0123456789+-"))
+		convertFromInt(input);
 
-    if (input == "-inff" || input == "+inff" || input == "nanf" || (isValidString(input, "0123456789.f+-") && (input.find('f') == input.size() - 1)))
-    {
-        try {
-            convertFromFloat(atof(input.c_str()));
-            return ;
-        }
-        catch (const std::out_of_range& e) {
-        }
-    }
+    else if (input == "-inff" || input == "+inff" || input == "nanf" || (isValidString(input, "0123456789.f+-") && (input.find('f') == input.size() - 1) && input.find_first_of('.') == input.find_last_of('.')))
+		convertFromFloat(atof(input.c_str()));
 
-    if (input == "-inf" || input == "+inf" || input == "nan" || isValidString(input, "0123456789.+-"))
-    {
-        try {
-            convertFromDouble(atof(input.c_str()));
-            return ;
-        }
-        catch (const std::out_of_range& e) {
-        }
-    }
+    else if ((input == "-inf" || input == "+inf" || input == "nan" || isValidString(input, "0123456789.+-")) && input.find_first_of('.') == input.find_last_of('.'))
+		convertFromDouble(atof(input.c_str()));
 
-    printOutput(NULL, NULL, NULL, NULL);
+    else
+		printOutput(NULL, NULL, NULL, NULL);
 }
 
 void ScalarConverter::convert(const std::string& input)
