@@ -37,17 +37,17 @@ void Base::identify(Base& p)
     try {
         (void)dynamic_cast<const A&>(p);
         std::cout << "A" << std::endl;
-    } catch (const std::bad_cast&)
+    } catch (const std::exception&)
     {
         try {
             (void)dynamic_cast<const B&>(p);
             std::cout << "B" << std::endl;
-        } catch (const std::bad_cast&)
+        } catch (const std::exception&)
         {
             try {
                 (void)dynamic_cast<const C&>(p);
                 std::cout << "C" << std::endl;
-            } catch (const std::bad_cast&)
+            } catch (const std::exception&)
             {
                 std::cout << "Unknown" << std::endl;
             }

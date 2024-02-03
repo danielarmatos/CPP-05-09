@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <typeinfo>
 
 class Base {
 private:
