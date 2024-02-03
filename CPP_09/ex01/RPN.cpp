@@ -14,17 +14,7 @@ RPN::~RPN() {
 
 }
 
-
 // *** //
-
-/*bool RPN::isNumber(const std::string& str) {
-    try {
-        std::stoi(str);
-        return true;
-    } catch (...) {
-        return false;
-    }
-}*/
 
 bool RPN::isNumber(const std::string& str) {
 	char* endPtr;
@@ -58,7 +48,6 @@ int RPN::processRPN(std::string expression)
     {
         if (isNumber(token))
         {
-           // int n = std::stoi(token);
 			int n = atoi(token.c_str());
             if (n > 9)
                 throw ErrorException();
