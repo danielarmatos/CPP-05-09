@@ -29,66 +29,6 @@ void PmergeMe::displaySequence(const Container& sequence) {
 }
 
 template <typename Container>
-void PmergeMe::mergeInsert(Container& sequence) {
-	std::cout << "merge insert collection before: ";
-	typename Container::iterator it;
-	for (it = sequence.begin(); it != sequence.end(); ++it) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl << std::endl;
-
-	if (sequence.size() == 2) {
-		typename Container::iterator first = sequence.begin();
-		typename Container::iterator second = first;
-		++second;
-
-		if (*first > *second) {
-			std::iter_swap(first, second);
-		}
-	}
-
-	std::cout << "merge insert collection after: ";
-	for (it = sequence.begin(); it != sequence.end(); ++it) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl << std::endl;
-
-}
-
-template <typename Container>
-void PmergeMe::splitCollection(Container& sequence) {
-    if (sequence.size() <= 1) {
-		return ;
-	}
-	/*std::cout << "split collection: ";
-	typename Container::iterator it;
-	for (it = sequence.begin(); it != sequence.end(); ++it) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl << std::endl;*/
- // Split the sequence into two halves
-    typename Container::iterator middle = sequence.begin() + sequence.size() / 2;
-    Container left(sequence.begin(), middle);
-    Container right(middle, sequence.end());
-
-    // Recursively sort the two halves
-	splitCollection(left);
-	splitCollection(right);
-
-    // Merge sort two containers into a single container.
-	/*if ()
-	std::cout << "mergeInsertSort 2: ";
-	for (it = sequence.begin(); it != sequence.end(); ++it) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl << std::endl;
-    Container merged;
-    std::merge(left.begin(), left.end(), right.begin(), right.end(), std::back_inserter(merged));
-    std::swap(sequence, merged);*/
-	mergeInsert(sequence);
-}
-
-/*template <typename Container>
 void PmergeMe::mergeInsertSort(Container& sequence) {
     if (sequence.size() <= 1)
         return ;
@@ -106,7 +46,7 @@ void PmergeMe::mergeInsertSort(Container& sequence) {
     Container merged;
     std::merge(left.begin(), left.end(), right.begin(), right.end(), std::back_inserter(merged));
     std::swap(sequence, merged);
-}*/
+}
 
 void PmergeMe::sortVector(char **nbs)
 {
@@ -121,7 +61,7 @@ void PmergeMe::sortVector(char **nbs)
     }
 
     this->vector = vector;
-	splitCollection(vector);
+	mergeInsertSort(vector);
 
     std::clock_t end = std::clock();
     std::clock_t duration = end - start;
@@ -148,7 +88,7 @@ void PmergeMe::sortDeque(char **nbs)
     }
 
     this->deque = deque;
-	splitCollection(deque);
+	mergeInsertSort(deque);
 
     //duration = std::clock() - duration;
     double duration = ( std::clock() - start );
