@@ -8,7 +8,6 @@
 #include <limits>
 #include <cstdlib>
 
-
 class BitcoinExchange {
 private:
     std::map<std::string, float> database;
@@ -16,6 +15,7 @@ private:
     void bitcoinExchange(const std::string& str);
     bool isValidDate(const std::string& dateString);
     float exchangeRate(const std::string& date);
+
 public:
     BitcoinExchange();
     BitcoinExchange(const BitcoinExchange &other);
