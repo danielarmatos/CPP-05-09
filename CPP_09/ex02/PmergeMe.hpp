@@ -13,13 +13,14 @@ private:
 
 public:
     PmergeMe();
-    PmergeMe(const PmergeMe &);
-    PmergeMe& operator=(const PmergeMe &);
+    PmergeMe(const PmergeMe &other);
+    PmergeMe& operator=(const PmergeMe &other);
     ~PmergeMe();
 
     void sortVector(char **nbs);
     void sortDeque(char **nbs);
-    template <typename Container> void mergeInsertSort(Container& sequence);
+    template <typename Container> void splitCollection(Container& sequence);
+	template <typename Container> void mergeInsert(Container& sequence);
     template <typename Container> void displaySequence(const Container& sequence);
 
 
