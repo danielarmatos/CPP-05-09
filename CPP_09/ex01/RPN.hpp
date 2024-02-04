@@ -6,6 +6,7 @@
 #include <stack>
 #include <cstring>
 #include <cstdlib>
+#include <climits>
 
 class RPN {
 private:
@@ -18,8 +19,8 @@ private:
 
 public:
     RPN();
-    RPN(const RPN &);
-    RPN& operator=(const RPN&);
+    RPN(const RPN &other);
+    RPN& operator=(const RPN &other);
     ~RPN();
 
     int processRPN(std::string expression);
