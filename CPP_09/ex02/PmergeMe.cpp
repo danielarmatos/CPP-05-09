@@ -29,23 +29,91 @@ void PmergeMe::displaySequence(const Container& sequence) {
 }
 
 template <typename Container>
-void PmergeMe::mergeInsertSort(Container& sequence) {
+int PmergeMe::sortWithPair(Container& top, Container& bottom)
+{
+    int low = 0;
+    int high = top.size() - 1;
+
+    int target = *top.begin();
+    //int itBottom = *bottom.begin();
+    top.erase(top.begin());
+    bottom.erase(bottom.begin());
+    std::cout << "sortWithPair: " << target << std::endl;
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (top[mid] == target) {
+            return mid;
+        } else if (top[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+
+template <typename Container>
+void PmergeMe::pairAndSwap(Container& top, Container& bottom)
+{
+    std::cout << " ==========\nTop: " << std::endl;
+    displaySequence(top);
+    std::cout << "Bottom: " << std::endl;
+    displaySequence(bottom);
+
+
+    typename Container::iterator itTop = top.begin();
+    typename Container::iterator itBottom = bottom.begin();
+
+    while (itTop != top.end() && itBottom != bottom.end())
+    {
+        if (*itTop <= *itBottom)
+        {
+            std::swap(*itTop, *itBottom);
+        }
+        itTop++;
+        itBottom++;
+    }
+    std::cout << "Top: " << std::endl;
+    displaySequence(top);
+    std::cout << "Bottom: " << std::endl;
+    displaySequence(bottom);
+    std::cout << " ==========" << std::endl;
+
+}
+
+template <typename Container>
+void PmergeMe::mergeInsertSort(Container& sequence)
+{
     if (sequence.size() <= 1)
         return ;
 
     // Split the sequence into two halves
-    typename Container::iterator middle = sequence.begin() + sequence.size() / 2;
-    Container left(sequence.begin(), middle);
-    Container right(middle, sequence.end());
+    typename Container::iterator it = sequence.begin();
+    Container top;
+    Container bottom;
+    while (it != sequence.end())
+    {
+        if (it == sequence.end() - 1)
+        {
+            // If the iterator points to the last element, push it to the bottom
+            bottom.push_back(*it);
+            break;
+        }
+        top.push_back(*it);
+        it++;
+        bottom.push_back(*it);
+        it++;
+    }
 
-    // Recursively sort the two halves
-    mergeInsertSort(left);
-    mergeInsertSort(right);
+    // Make a pair for each two numbers and make a swap of necessary in order that the bigger number stays in the top sequence
+    pairAndSwap(top, bottom);
 
-    // Merge sort two containers into a single container.
-    Container merged;
-    std::merge(left.begin(), left.end(), right.begin(), right.end(), std::back_inserter(merged));
-    std::swap(sequence, merged);
+    // Order the top sequence, maintaining the pair with the bottom sequence
+    int res = sortWithPair(top, bottom);
+    std::cout << "Res: " << res << std::endl;
 }
 
 void PmergeMe::sortVector(char **nbs)
