@@ -32,10 +32,6 @@ bool validateSequence(int argc, char** argv)
 
 int main(int argc, char **argv)
 {
-    int a[] = { 2, 5, 4, 9, 8 };
-    int n = sizeof(a) / sizeof(a[0]);
-    std::cout << "n: " << n << std::endl;
-
     if (argc < 2)
     {
         std::cout << "Usage: " << argv[0] << " <positive integer sequence>" << std::endl;
@@ -53,14 +49,4 @@ int main(int argc, char **argv)
     PmergeMe merge;
     merge.sortVector(argv + 1);
     merge.sortDeque(argv + 1);
-
-
-/*
-    std::cout << "After: " << std::endl;
-    std::cout   << "Time to process a range of " << argc - 1
-                << " elements with std::vector : " << std::endl;
-
-    std::cout   << "Time to process a range of " << argc - 1
-                << " elements with std::deque : " << std::endl;
-*/
 }
