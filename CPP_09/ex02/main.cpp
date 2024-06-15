@@ -30,29 +30,18 @@ bool validateSequence(int argc, char** argv)
 	return true;
 }
 
-/*bool validateSequence(int argc, char **argv)
-{
-    for (int i = 1; i < argc; i++)
-    {
-        try {
-            int n = std::stoi(argv[i]);
-            if (n < 0)
-                throw std::exception();
-        } catch (const std::exception& e) {
-            std::cerr << "Error: please use a positive integer sequence as argument" << std::endl;
-            return false;
-        }
-    }
-    return true;
-}*/
-
 int main(int argc, char **argv)
 {
+    int a[] = { 2, 5, 4, 9, 8 };
+    int n = sizeof(a) / sizeof(a[0]);
+    std::cout << "n: " << n << std::endl;
+
     if (argc < 2)
     {
         std::cout << "Usage: " << argv[0] << " <positive integer sequence>" << std::endl;
         return (1);
     }
+
     if (!validateSequence(argc, argv))
         return (1);
 
@@ -64,9 +53,6 @@ int main(int argc, char **argv)
     PmergeMe merge;
     merge.sortVector(argv + 1);
     merge.sortDeque(argv + 1);
-
-
-
 
 
 /*

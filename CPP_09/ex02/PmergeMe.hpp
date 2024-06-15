@@ -19,7 +19,10 @@ public:
 
     void sortVector(char **nbs);
     void sortDeque(char **nbs);
-    template <typename Container> int sortWithPair(Container& top, Container& bottom);
+    template <typename Container> Container createJacobsthalNumbers(int size);
+    template <typename Container> void binarySearch(Container& ordered, int numb);
+    template <typename Container> void binarySearchWithPair(Container& top, Container& bottom);
+    template <typename Container> void sortWithPair(Container& top, Container& bottom);
     template <typename Container> void pairAndSwap(Container& top, Container& bottom);
     template <typename Container> void mergeInsertSort(Container& sequence);
     template <typename Container> void displaySequence(const Container& sequence);
